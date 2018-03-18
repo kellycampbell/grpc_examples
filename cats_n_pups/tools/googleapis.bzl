@@ -35,3 +35,17 @@ go_proto_library(
     ],
     importpath = "google.golang.org/genproto/googleapis/api"
 )
+
+load("@com_google_protobuf//:protobuf.bzl", "py_proto_library")
+
+py_proto_library(
+    name = "api_proto_py",
+    srcs = [
+        "google/api/annotations.proto",
+        "google/api/http.proto",
+    ],
+    include = ".",
+    default_runtime = "@com_google_protobuf//:protobuf_python",
+    protoc = "@com_google_protobuf//:protoc",
+    deps = ["@com_google_protobuf//:protobuf_python"],
+)

@@ -131,3 +131,29 @@ go_binary(
     ] + GRPC_GATEWAY_DEPS
 
 )
+
+
+load("@org_pubref_rules_protobuf//python:rules.bzl", "py_proto_library")
+
+
+py_proto_library(
+    name = "py",
+    protos = [
+        "metadata.proto",
+        "catpic.proto",
+        "puppypic.proto"
+    ],
+    deps = [
+        "@com_github_googleapis//:api_proto_py"
+    ],
+    imports = [
+        "external/com_github_googleapis/",
+        "external/com_google_protobuf/src/"
+    ],
+    inputs = [
+        "@com_github_googleapis//:api_protos",
+        "@com_google_protobuf//:well_known_protos"
+    ],
+    with_grpc = True,
+    # verbose = 1,
+)
