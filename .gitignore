@@ -3,3 +3,5 @@ bazel-cats_n_pups
 bazel-genfiles
 bazel-out
 bazel-testlogs
+node_modules
+

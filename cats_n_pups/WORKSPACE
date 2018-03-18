@@ -1,4 +1,4 @@
-workspace(name = "cat_n_pups")
+workspace(name = "cats_n_pups")
 
 # http_archive(
 #     name = "io_bazel_rules_go",
@@ -53,13 +53,13 @@ go_repository(
 
 )
 
-
-# Python imports
-
+# =========================================
+#             Python imports
+# =========================================
 git_repository(
   name = "org_pubref_rules_protobuf",
-  remote = "https://github.com/pubref/rules_protobuf",
-  commit = "7c8c80b61e3a0bc30fd61302d781a317524b0167" # 3/15/18
+  remote = "https://github.com/kellycampbell/rules_protobuf",
+  commit = "3802eff121a7a332b668c1c8af4721827b377de8" # 3/15/18
 )
 
 
@@ -103,3 +103,32 @@ bind(
     actual = "@six_archive//:six",
 )
 
+# =========================================
+#      NodeJS and Typescript Imports
+# =========================================
+
+git_repository(
+    name = "build_bazel_rules_nodejs",
+    remote = "https://github.com/bazelbuild/rules_nodejs.git",
+    commit = "a67f2be208e84335e78ddfb68f5bbce2750a7b4a" # 03/18/2018
+)
+
+# git_repository(
+#     name = "build_bazel_rules_typescript",
+#     remote = "https://github.com/bazelbuild/rules_typescript.git",
+#     commit = "3bfca0624df383e31cff697c7a07d229f9179e05" # 03/18/2018
+# )
+
+
+load("@build_bazel_rules_nodejs//:defs.bzl", "node_repositories", "npm_install")
+node_repositories(package_json = ["//:package.json"])
+
+npm_install(
+    name = "hello",
+    # This can also take package.json
+    package_json = "//:package-lock.json",
+)
+
+
+# load("@build_bazel_rules_typescript//:defs.bzl", "ts_setup_workspace")
+# ts_setup_workspace()

@@ -125,6 +125,9 @@ GRPC_GATEWAY_DEPS = [
 go_binary(
     name = "gateway",
     srcs = ["gateway.go"],
+    args = [
+        "-logtostderr",
+    ],
     deps = [
         ":catpic_proto_gw",
         ":puppypic_proto_gw",
