@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package cats_n_pups.api.v1;
+
+option go_package = "github.com/kellycampbell/grpc_examples/cats_n_pups/protos/puppypic";
+
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+
+// Local imports need to be relative to the project
+import "protos/metadata.proto";
+
+
+// See https://github.com/googleapis/googleapis/blob/master/google/api/http.proto for details on the google.api.http tags.
+// See https://github.com/grpc-ecosystem/grpc-gateway/blob/master/examples/examplepb/a_bit_of_everything.proto 
+//   for an example of what kinds of annotations the swagger doc generator uses.
+
+// Designing a transcoding friendly api: https://cloud.google.com/endpoints/docs/grpc/transcoding
+
+// Puppy Picture Service
+service PuppyPicsService {
+    
+    // Create a puppy picture
+    rpc CreatePuppyPic (CreatePuppyPicRequest) returns (PuppyPic) {
+        option (google.api.http) = {
+            post: "/api/v1/puppypics"
+            body: "puppy_pic"
+          };
+    };
+
+    // Get a random puppy picture
+    rpc GetPuppyPic (GetPuppyPicRequest) returns (PuppyPic) {
+        option (google.api.http) = {
+            get: "/api/v1/puppypics/{puppy_pic_id}"
+        };
+    };
+
+    // Remove a puppy picture
+    rpc DeletePuppyPic (DeletePuppyPicRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            delete: "/api/v1/puppypics/{puppy_pic_id}"
+        };
+    }
+}
+
+
+message PuppyPic {
+    // Unique identifier
+    string id = 1;
+    // URL to the picture
+    string url = 2;
+
+    cats_n_pups.api.v1.Metadata metadata = 3;
+}
+
+// Request to create a puppy picture
+message CreatePuppyPicRequest {
+    PuppyPic puppy_pic = 1;
+}
+
+message GetPuppyPicRequest {
+    string puppy_pic_id = 1;
+}
+
+message DeletePuppyPicRequest {
+    string puppy_pic_id = 1;
+}

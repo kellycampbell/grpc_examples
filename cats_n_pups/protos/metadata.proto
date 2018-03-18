@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package cats_n_pups.api.v1;
+
+option go_package = "github.com/kellycampbell/grpc_examples/cats_n_pups/protos/metadata";
+
+
+import "google/protobuf/timestamp.proto";
+
+message Metadata {
+    string object_version = 1;
+    // Date/time object was added
+    google.protobuf.Timestamp create_timestamp = 2;
+    google.protobuf.Timestamp update_timestamp = 3;
+    google.protobuf.Timestamp delete_timestamp = 4;
+}

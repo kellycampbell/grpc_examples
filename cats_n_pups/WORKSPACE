@@ -1,0 +1,54 @@
+workspace(name = "cat_n_pups")
+
+# http_archive(
+#     name = "io_bazel_rules_go",
+#     url = "https://github.com/bazelbuild/rules_go/releases/download/0.10.1/rules_go-0.10.1.tar.gz",
+#     sha256 = "4b14d8dd31c6dbaf3ff871adcd03f28c3274e42abc855cb8fb4d01233c0154dc",
+# )
+
+http_archive(
+    name = "io_bazel_rules_go",
+    url = "https://github.com/kellycampbell/rules_go/archive/1800f16118021a2736b9d7dac920751a344cdb2d.zip",
+    strip_prefix = "rules_go-1800f16118021a2736b9d7dac920751a344cdb2d/",
+    sha256 = "18ca5c0de2f44640b5da4270080565bff4b29d7451692671ad0adcd64ba73e01",
+)
+
+
+# http_archive(
+#     name = "bazel_gazelle",
+#     url = "https://github.com/bazelbuild/bazel-gazelle/releases/download/0.10.0/bazel-gazelle-0.10.0.tar.gz",
+#     sha256 = "6228d9618ab9536892aa69082c063207c91e777e51bd3c5544c9c060cafe1bd8",
+# )
+
+http_archive(
+    name = "bazel_gazelle",
+    url = "https://github.com/bazelbuild/bazel-gazelle/archive/f4ae892927eeabd060c59693c38e82303f41558d.zip",
+    strip_prefix = "bazel-gazelle-f4ae892927eeabd060c59693c38e82303f41558d/",
+    sha256 = "cb8ae1c87ecfbd3b22112cadd7bf940bf8f0ef1207eebdb86e9b3e05ff89513d",
+)
+
+new_http_archive(
+  name = "com_github_googleapis",
+  url = "https://github.com/googleapis/googleapis/archive/3da9235eeef5357b8704a7c0a88c7b75a9e6ad35.zip",
+  strip_prefix = "googleapis-3da9235eeef5357b8704a7c0a88c7b75a9e6ad35/",
+  build_file = "tools/googleapis.bzl"
+)
+
+
+load("@io_bazel_rules_go//go:def.bzl", "go_rules_dependencies", "go_register_toolchains", "go_repository")
+go_rules_dependencies()
+go_register_toolchains()
+
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+gazelle_dependencies()
+
+
+go_repository(
+    name = "com_github_grpc_ecosystem_grpc_gateway",
+    importpath = "github.com/grpc-ecosystem/grpc-gateway",
+    remote = "git@github.com:grpc-ecosystem/grpc-gateway.git",
+    vcs = "git",
+    commit = "58f78b988bc393694cef62b92c5cde77e4742ff5",
+    build_file_proto_mode = "legacy",
+
+)

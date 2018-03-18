@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package cats_n_pups.api.v1;
+
+option go_package = "github.com/kellycampbell/grpc_examples/cats_n_pups/protos/catpic";
+
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+
+// Local imports need to be relative to the project
+import "protos/metadata.proto";
+
+// See https://github.com/googleapis/googleapis/blob/master/google/api/http.proto for details on the google.api.http tags.
+// See https://github.com/grpc-ecosystem/grpc-gateway/blob/master/examples/examplepb/a_bit_of_everything.proto 
+//   for an example of what kinds of annotations the swagger doc generator uses.
+
+// Designing a transcoding friendly api: https://cloud.google.com/endpoints/docs/grpc/transcoding
+
+// Cat Picture Service
+service CatPicsService {
+    
+    // Create a cat picture
+    rpc CreateCatPic (CreateCatPicRequest) returns (CatPic) {
+        option (google.api.http) = {
+            post: "/api/v1/catpics"
+            body: "cat_pic"
+          };
+    };
+
+    // Get a random cat picture
+    rpc GetCatPic (GetCatPicRequest) returns (CatPic) {
+        option (google.api.http) = {
+            get: "/api/v1/catpics/{cat_pic_id}"
+        };
+    };
+
+    // Remove a cat picture
+    rpc DeleteCatPic (DeleteCatPicRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            delete: "/api/v1/catpics/{cat_pic_id}"
+        };
+    }
+}
+
+
+message CatPic {
+    // Unique identifier
+    string id = 1;
+    // URL to the picture
+    string url = 2;
+
+    cats_n_pups.api.v1.Metadata metadata = 3;
+}
+
+// Request to create a cat picture
+message CreateCatPicRequest {
+    CatPic cat_pic = 1;
+}
+
+message GetCatPicRequest {
+    string cat_pic_id = 1;
+}
+
+message DeleteCatPicRequest {
+    string cat_pic_id = 1;
+}
