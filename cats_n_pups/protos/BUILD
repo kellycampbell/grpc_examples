@@ -65,6 +65,7 @@ go_proto_library(
     ],
     deps = [
         ":metadata_proto_go",
+        # ":catpic_proto_go",
     ],
     importpath = "github.com/kellycampbell/grpc_examples/cats_n_pups/protos/catpic",
 )

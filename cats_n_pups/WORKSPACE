@@ -8,10 +8,18 @@ workspace(name = "cats_n_pups")
 
 http_archive(
     name = "io_bazel_rules_go",
-    url = "https://github.com/kellycampbell/rules_go/archive/1800f16118021a2736b9d7dac920751a344cdb2d.zip",
-    strip_prefix = "rules_go-1800f16118021a2736b9d7dac920751a344cdb2d/",
-    sha256 = "18ca5c0de2f44640b5da4270080565bff4b29d7451692671ad0adcd64ba73e01",
+    url = "https://github.com/bazelbuild/rules_go/archive/63cd14e0e7db10411bc64a4c870398608435a23d.zip",
+    strip_prefix = "rules_go-63cd14e0e7db10411bc64a4c870398608435a23d/",
+    sha256 = "130dde139d7601819b30bc918aee5d9b47c802dc5790ede366231404bddf94f5",
 )
+
+# http_archive(
+#     name = "io_bazel_rules_go",
+#     url = "https://github.com/kellycampbell/rules_go/archive/1800f16118021a2736b9d7dac920751a344cdb2d.zip",
+#     strip_prefix = "rules_go-1800f16118021a2736b9d7dac920751a344cdb2d/",
+#     sha256 = "18ca5c0de2f44640b5da4270080565bff4b29d7451692671ad0adcd64ba73e01",
+# )
+
 
 
 # http_archive(
