@@ -11,7 +11,8 @@ cd cats_n_pups
 Build & run the JSON -> gRPC gateway:
 ```
 bazel build protos:gateway
-./bazel-bin/protos/linux_amd64_stripped/gateway -logtostderr  # This will be different depending on your OS
+ # This will be different depending on your OS
+./bazel-bin/protos/linux_amd64_stripped/gateway -logtostderr
 ```
 
 This will take a while the first time as bazel builds all the tools and dependencies (could be 10+ mins).

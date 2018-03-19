@@ -59,7 +59,7 @@ go_repository(
 git_repository(
   name = "org_pubref_rules_protobuf",
   remote = "https://github.com/kellycampbell/rules_protobuf",
-  commit = "3802eff121a7a332b668c1c8af4721827b377de8" # 3/15/18
+  commit = "7c8c80b61e3a0bc30fd61302d781a317524b0167" # 3/15/18
 )
 
 
